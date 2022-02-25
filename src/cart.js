@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BehaviorSubject } from "rxjs";
 
-const API_SERVER = "http://localhost:8080";
+const API_SERVER =
+  "https://module-federation-server-oar21wbde-osamaishaq.vercel.app";
 
 export const jwt = new BehaviorSubject(null);
 export const cart = new BehaviorSubject(null);

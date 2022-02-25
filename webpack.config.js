@@ -2,9 +2,12 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const deps = require("./package.json").dependencies;
-module.exports = {
+module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3002/",
+    publicPath:
+      argv.mode === "development"
+        ? "http://localhost:3002/"
+        : "https://module-federation-cart-p3uq8aid6-osamaishaq.vercel.app/",
   },
 
   resolve: {
@@ -44,9 +47,18 @@ module.exports = {
       name: "cart",
       filename: "remoteEntry.js",
       remotes: {
-        home: "home@http://localhost:3000/remoteEntry.js",
-        pdp: "pdp@http://localhost:3001/remoteEntry.js",
-        cart: "cart@http://localhost:3002/remoteEntry.js",
+        home:
+          argv.mode === "development"
+            ? "home@http://localhost:3000/remoteEntry.js"
+            : "home@https://module-federation-home-ftl8prbdh-osamaishaq.vercel.app/remoteEntry.js",
+        pdp:
+          argv.mode === "development"
+            ? "pdp@http://localhost:3001/remoteEntry.js"
+            : "https://module-federation-pdp.vercel.app/remoteEntry.js",
+        cart:
+          argv.mode === "development"
+            ? "cart@http://localhost:3002/remoteEntry.js"
+            : "cart@https://module-federation-cart-p3uq8aid6-osamaishaq.vercel.app/remoteEntry.js",
       },
       exposes: {
         "./cart": "./src/cart.js",
@@ -70,4 +82,4 @@ module.exports = {
       template: "./src/index.html",
     }),
   ],
-};
+});
