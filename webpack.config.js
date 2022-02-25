@@ -7,7 +7,7 @@ module.exports = (_, argv) => ({
     publicPath:
       argv.mode === "development"
         ? "http://localhost:3002/"
-        : "https://module-federation-cart-p3uq8aid6-osamaishaq.vercel.app/",
+        : "https://module-federation-cart.vercel.app/",
   },
 
   resolve: {
@@ -50,7 +50,7 @@ module.exports = (_, argv) => ({
         home:
           argv.mode === "development"
             ? "home@http://localhost:3000/remoteEntry.js"
-            : "home@https://module-federation-home-ftl8prbdh-osamaishaq.vercel.app/remoteEntry.js",
+            : "home@https://module-federation-home.vercel.app/remoteEntry.js",
         pdp:
           argv.mode === "development"
             ? "pdp@http://localhost:3001/remoteEntry.js"
@@ -58,7 +58,7 @@ module.exports = (_, argv) => ({
         cart:
           argv.mode === "development"
             ? "cart@http://localhost:3002/remoteEntry.js"
-            : "cart@https://module-federation-cart-p3uq8aid6-osamaishaq.vercel.app/remoteEntry.js",
+            : "cart@https://module-federation-cart.vercel.app/remoteEntry.js",
       },
       exposes: {
         "./cart": "./src/cart.js",
